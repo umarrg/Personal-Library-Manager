@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Typography,
+  Toolbar,
+  Button,
+  Box,
+} from "@mui/material";
+import AddBook from "./pages/addBook";
+import BookTable from "./pages/books";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <AppBar position="static">
+          <Toolbar>
+            <Box component="div" sx={{ flexGrow: 1 }}>
+              <Link style={{ textDecoration: "none" }} to={"/"}>
+                <Typography
+                  color={"white"}
+                  fontWeight={"bold"}
+                  fontSize={"20px"}
+                >
+                  Personal Library Manager
+                </Typography>
+              </Link>
+            </Box>
+            <Button color="inherit" component={Link} to="/add">
+              Add Book
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <Routes>
+          <Route path="/" Component={BookTable} />
+          <Route path="/add" Component={AddBook} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
